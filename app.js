@@ -1,13 +1,24 @@
-//npm run server - for (nodemon app) start
-//npm start - for (node app) start
-
 const express = require('express');
-const routes = require('./routes/api') 
+const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(routes);
+// Body Parser Middleware
+app.use(bodyParser.urlencoded({extended: true}));
+// Parse application/json
+app.use(bodyParser.json());
 
-app.listen(process.env.PORT || 3000, function(){
-    console.log('Now listening on port 3000.');
+// Routes
+const index = require('./routes/index');
+app.use('/api', index);
+// -- Users
+const users = require('./routes/users');
+app.use('/api/users', users);
+
+// Server PORT
+const PORT = process.env.PORT || 4000;
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 });
