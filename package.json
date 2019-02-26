@@ -4,7 +4,8 @@
   "description": "Search photos from unsplash. Add to favourite, like and comment.\u001b[",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app",
+    "server": "nodemon app"
   },
   "keywords": [
     "photo",
