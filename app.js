@@ -1,7 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 
 const app = express();
+
+const config = require('./config/database');
+
+// Connect to Database
+mongoose.connect(config.database, {useNewUrlParser: true});
+mongoose.set('useCreateIndex', true);
+let db = mongoose.connection;
+
+// Check connection
+db.once('open', () => {
+    console.log('Connected to Database');
+});
+
+// Check for DB errors
+db.on('error', (err) => {
+    console.log(err.errmsg);
+});
 
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({extended: true}));
