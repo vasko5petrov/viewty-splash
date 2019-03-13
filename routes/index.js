@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 
+// Index route
 router.get('/', function (req, res) {
-    res.send('hello world');
+    res.status(200).json({message: "Index route"});
 });
 
 
