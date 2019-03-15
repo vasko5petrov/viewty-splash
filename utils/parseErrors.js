@@ -4,7 +4,7 @@ const parseErrors = function(errors) {
     const result = {};
 
     _.forEach(errors, (val, key) => {
-        result[key] = val.message;
+        result[key] = val.msg;
     })
 
     return result;

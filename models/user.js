@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const uniqueValidator = require('mongoose-unique-validator');
-
 const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -34,14 +32,14 @@ const UserSchema = mongoose.Schema({
     }
 }, {timestamps: true});
 
-UserSchema.plugin(uniqueValidator, { message: "This {PATH} is already taken"});
-
 const User = module.exports = mongoose.model('User', UserSchema);
 
 module.exports.addUser = (newUser, callback) => {
     User.setPassword(newUser.password)
         .then(hash => {
+            console.log(newUser.password);
             newUser.password = hash;
+            console.log(newUser.password);
             newUser.save(callback);
         })
         .catch(err => callback(err, null));

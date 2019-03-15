@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
+const expressValidator = require('express-validator')
 
 const app = express();
 
@@ -26,6 +27,9 @@ db.on('error', (err) => {
 app.use(bodyParser.urlencoded({extended: true}));
 // Parse application/json
 app.use(bodyParser.json());
+
+// Express Validator
+app.use(expressValidator())
 
 // Routes
 const index = require('./routes/index');
